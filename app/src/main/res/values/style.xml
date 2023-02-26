@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTextGeneric">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTextButton">
+        <item name="android:textColor">@drawable/selector_generic_text</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/sketch_font</item>
+    </style>
+
+    <style name="AppButtonGeneric" parent="AppTextButton">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@drawable/selector_generic_button</item>
+    </style>
+</resources>
