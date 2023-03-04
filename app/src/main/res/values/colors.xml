@@ -10,5 +10,6 @@
     <color name="white_transparent_0">#00FFFFFF</color>
     <color name="white_transparent_5">#0DFFFFFF</color>
     <color name="button_pressed">#FFE300</color>
+    <color name="text_headings">#FCE700</color>
     <color name="button_text_normal">#EF3131</color>
 </resources>

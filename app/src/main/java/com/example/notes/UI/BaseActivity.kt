@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
 import com.example.notes.R
 import com.example.notes.ViewModels.BaseViewModel
+import com.example.notes.ViewModels.HomeViewModel
 import com.example.notes.ViewModels.LoginViewModel
 import com.example.notes.databinding.ActivityBaseBinding
 
@@ -15,9 +16,12 @@ class BaseActivity : AppCompatActivity() {
 
     private lateinit var baseViewModel : BaseViewModel
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var homeViewModel: HomeViewModel
+
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
-    private lateinit var binding: ViewBinding
+
+    private lateinit var binding: ActivityBaseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +44,7 @@ class BaseActivity : AppCompatActivity() {
     private fun initViewModels() {
         baseViewModel = ViewModelProvider(this).get(BaseViewModel::class.java)
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
     private fun updateUI(loginState : Boolean) {

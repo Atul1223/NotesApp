@@ -8,25 +8,10 @@
         android:id="@+id/homeFragment"
         android:name="com.example.notes.UI.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <argument
-            android:name="userLoggedIn"
-            app:argType="boolean"
-            android:defaultValue="false" />
-        <argument
-            android:name="userId"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.notes.UI.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_login" />
 </navigation>

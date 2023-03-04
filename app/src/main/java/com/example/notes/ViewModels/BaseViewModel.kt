@@ -14,7 +14,7 @@ class BaseViewModel: ViewModel() {
 
 
     fun updateLoginState() {
-        stateLogIn = true
+        stateLogIn = !stateLogIn
         _stateLogIn.value = stateLogIn
     }
 

@@ -16,4 +16,9 @@ class LoginViewModel: ViewModel() {
         loginState = true
         _logInState.value = loginState
     }
+
+    fun logOutUser() {
+        loginState = false
+        _logInState.value = loginState
+    }
 }
