@@ -1,50 +1,49 @@
-package com.example.notes.UI
+package com.example.notes.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.viewbinding.ViewBinding
 import com.example.notes.R
-import com.example.notes.ViewModels.BaseViewModel
-import com.example.notes.ViewModels.HomeViewModel
-import com.example.notes.ViewModels.LoginViewModel
+import com.example.notes.viewModels.BaseViewModel
+import com.example.notes.viewModels.HomeViewModel
+import com.example.notes.viewModels.LoginViewModel
 import com.example.notes.databinding.ActivityBaseBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BaseActivity : AppCompatActivity() {
 
-    private lateinit var baseViewModel : BaseViewModel
-    private lateinit var loginViewModel: LoginViewModel
-    private lateinit var homeViewModel: HomeViewModel
+    private val loginViewModel: LoginViewModel by viewModel()
 
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
 
-    private lateinit var binding: ActivityBaseBinding
+    private var _binding: ActivityBaseBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBaseBinding.inflate(layoutInflater)
+        _binding = ActivityBaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        initViewModels()
 
         setNavController()
 
         initObservable()
     }
 
-    private fun initObservable() {
-        baseViewModel.getLoginState().observe(this) {
-            updateUI(it)
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
-    private fun initViewModels() {
-        baseViewModel = ViewModelProvider(this).get(BaseViewModel::class.java)
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+    private fun initObservable() {
+        loginViewModel.getLoginState().observe(this) {
+            updateUI(it)
+        }
     }
 
     private fun updateUI(loginState : Boolean) {
