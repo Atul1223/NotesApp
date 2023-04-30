@@ -1,22 +1,23 @@
 package com.example.notes.ui
 
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notes.R
 import com.example.notes.viewModels.HomeViewModel
 import com.example.notes.viewModels.LoginViewModel
 import com.example.notes.databinding.FragmentHomeBinding
 import com.example.notes.viewModels.NoteViewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val loginViewModel: LoginViewModel by activityViewModels()
@@ -55,14 +56,31 @@ class HomeFragment : Fragment() {
 
     private fun initObservable() {
         homeViewModel.getNotesListSize().observe(viewLifecycleOwner){
-            binding.ivHomeVd.isVisible = it <= 0
+            it?.let {
+                if(it<=0) {
+                    binding.ivHomeVd.isVisible = true
+                    binding.notesRecyclerView.isVisible =  false
+                }
+                else{
+                    binding.ivHomeVd.isVisible = false
+                    binding.notesRecyclerView.isVisible = true
+                    initRecyclerView()
+                }
+            }
         }
+    }
+
+    private fun initRecyclerView() {
+        binding.notesRecyclerView.adapter =  NotesAdapter(this)
+        binding.notesRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+
     }
 
     private fun initClickListeners() {
         binding.ivCreateNote.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_homeFragment_to_noteFragment)
+            navigate()
             noteViewModel.setIsNewNote(true)
+            homeViewModel.addToNotesList()
         }
 
         binding.ivHomeSearch.setOnClickListener {
@@ -71,11 +89,16 @@ class HomeFragment : Fragment() {
 
         binding.ivHomeSearchClose.setOnClickListener {
             handleCloseSearch()
+            homeViewModel.removeFromNotesList()
         }
 
         binding.ivHomeLogout.setOnClickListener {
             loginViewModel.logOutUser()
         }
+    }
+
+    private fun navigate(){
+        binding.root.findNavController()?.navigate(R.id.action_homeFragment_to_noteFragment)
     }
 
     private fun updateImage() {
@@ -110,6 +133,16 @@ class HomeFragment : Fragment() {
         binding.ivHomeSearchClose.isVisible = !binding.ivHomeSearchClose.isVisible
         binding.tvHomeWelcome.isVisible = !binding.tvHomeWelcome.isVisible
         binding.tvHomeUsername.isVisible = !binding.tvHomeUsername.isVisible
+    }
+
+    override fun onItemClick(position: Int) {
+        navigate()
+        noteViewModel.setIsNewNote(false)
+        Toast.makeText(requireContext(),"$position",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDeleteClick(position: Int) {
+
     }
 
 }

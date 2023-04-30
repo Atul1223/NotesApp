@@ -1,8 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/notes_item_tile"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="45dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/selector_bg_note_tile">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_note_tile_heading"
+        style="@style/AppNoteHeadingTile"
+        android:text="This is some long text that will be truncated at the end."
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_note_tile_date"/>
 
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_note_tile_date"
+        style="@style/AppNoteDateTile"
+        android:text="12/10/2001"
+        app:layout_constraintTop_toBottomOf="@id/tv_note_tile_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_note_tile_tag"
+        style="@style/AppImageIconGeneric"
+        android:src="@drawable/vd_tag_round_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_note_tile_delete"
+        style="@style/AppImageIconGeneric"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/selector_delete_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_note_tile_tag"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

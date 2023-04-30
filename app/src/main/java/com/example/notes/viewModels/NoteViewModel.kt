@@ -19,6 +19,6 @@ class NoteViewModel: BaseViewModel() {
     }
 
     fun setIsNewNote(isNewNote: Boolean) {
-        _isNewNote.value = true
+        _isNewNote.value = isNewNote
     }
 }
