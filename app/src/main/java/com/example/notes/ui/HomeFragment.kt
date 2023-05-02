@@ -9,19 +9,30 @@ import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Dao
 import com.example.notes.R
 import com.example.notes.viewModels.HomeViewModel
 import com.example.notes.viewModels.LoginViewModel
 import com.example.notes.databinding.FragmentHomeBinding
+import com.example.notes.notesData.NotesDao
+import com.example.notes.notesData.NotesViewModelFactory
 import com.example.notes.viewModels.NoteViewModel
+import org.koin.java.KoinJavaComponent.getKoin
 
 class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val loginViewModel: LoginViewModel by activityViewModels()
-    private val noteViewModel: NoteViewModel by activityViewModels()
+    private val noteViewModel: NoteViewModel by viewModels {
+        NotesViewModelFactory(getMyParameterFromKoin())
+    }
+
+    private fun getMyParameterFromKoin(): NotesDao {
+        return getKoin().get()
+    }
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!

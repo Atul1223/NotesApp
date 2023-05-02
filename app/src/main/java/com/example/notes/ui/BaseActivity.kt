@@ -2,22 +2,19 @@ package com.example.notes.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.notes.R
-import com.example.notes.viewModels.BaseViewModel
-import com.example.notes.viewModels.HomeViewModel
 import com.example.notes.viewModels.LoginViewModel
 import com.example.notes.databinding.ActivityBaseBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.notes.notesData.NotesDatabase
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BaseActivity : AppCompatActivity() {
 
     private val loginViewModel: LoginViewModel by viewModel()
+    //private val notesDatabase: NotesDatabase by inject()
 
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController

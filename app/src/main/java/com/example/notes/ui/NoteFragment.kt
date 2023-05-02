@@ -9,14 +9,28 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.notes.R
 import com.example.notes.databinding.FragmentNoteBinding
+import com.example.notes.notesData.Notes
+import com.example.notes.notesData.NotesDao
+import com.example.notes.notesData.NotesDatabase
+import com.example.notes.notesData.NotesViewModelFactory
 import com.example.notes.viewModels.NoteViewModel
+import org.koin.android.ext.android.inject
+import org.koin.java.KoinJavaComponent
+import java.util.Date
 
 class NoteFragment : Fragment() {
 
-    private val noteViewModel: NoteViewModel by activityViewModels()
+    private val noteViewModel: NoteViewModel by viewModels {
+        NotesViewModelFactory(getMyParameterFromKoin())
+    }
+
+    private fun getMyParameterFromKoin(): NotesDao {
+        return KoinJavaComponent.getKoin().get()
+    }
 
     private var _binding : FragmentNoteBinding? = null
     private val binding get() = _binding!!
@@ -93,7 +107,14 @@ class NoteFragment : Fragment() {
         }
 
         binding.ivBtnSaveNote.setOnClickListener {
-
+            noteViewModel.saveNotesData(
+                Notes(
+                    heading = "Hello",
+                    content = "Hello world",
+                    tag = noteViewModel.getCurrentTagType().toString(),
+                    //date = Date()
+                )
+            )
         }
 
         binding.ivBtnDeleteNote.setOnClickListener {

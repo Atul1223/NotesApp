@@ -1,27 +1,12 @@
 package com.example.notes.viewModels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.notes.notesData.NotesDatabase
+import org.koin.java.KoinJavaComponent.inject
 
 open class BaseViewModel: ViewModel() {
 
-//    private var stateLogIn =  false
-//
-//    private var _stateLogIn = MutableLiveData(stateLogIn)
-//
-//    fun getLoginState() : LiveData<Boolean> = _stateLogIn
-//
-//
-//    fun updateLoginState() {
-//        CoroutineScope(Dispatchers.Unconfined).launch {
-//            stateLogIn = !stateLogIn
-//            _stateLogIn.value = stateLogIn
-//        }
-//    }
-
+   //protected val notesDatabase: NotesDatabase by inject(NotesDatabase::class.java)
 
 }
