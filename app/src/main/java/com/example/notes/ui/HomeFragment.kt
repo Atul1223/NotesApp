@@ -1,6 +1,7 @@
 package com.example.notes.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Dao
 import com.example.notes.R
 import com.example.notes.viewModels.HomeViewModel
 import com.example.notes.viewModels.LoginViewModel
 import com.example.notes.databinding.FragmentHomeBinding
 import com.example.notes.notesData.NotesDao
-import com.example.notes.notesData.NotesViewModelFactory
+import com.example.notes.viewModels.NotesViewModelFactory
 import com.example.notes.viewModels.NoteViewModel
 import org.koin.java.KoinJavaComponent.getKoin
 
@@ -26,7 +26,7 @@ class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val loginViewModel: LoginViewModel by activityViewModels()
-    private val noteViewModel: NoteViewModel by viewModels {
+    private val noteViewModel: NoteViewModel by activityViewModels {
         NotesViewModelFactory(getMyParameterFromKoin())
     }
 
@@ -103,8 +103,22 @@ class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
             homeViewModel.removeFromNotesList()
         }
 
-        binding.ivHomeLogout.setOnClickListener {
-            loginViewModel.logOutUser()
+        binding.ivHomeSettings.setOnClickListener {
+            //loginViewModel.logOutUser()
+        }
+
+        binding.ivHomeSync.setOnClickListener {
+            binding.vHomeSyncAnimation.progress = 0f
+            binding.vHomeSyncAnimation.playAnimation()
+            binding.vHomeSyncAnimation.loop(true)
+            binding.ivHomeSync.isVisible = false
+            binding.vHomeSyncAnimation.isVisible= true
+        }
+
+        binding.vHomeSyncAnimation.setOnClickListener {
+            binding.vHomeSyncAnimation.pauseAnimation()
+            binding.ivHomeSync.isVisible = true
+            binding.vHomeSyncAnimation.isVisible= false
         }
     }
 
@@ -140,16 +154,18 @@ class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
     }
 
     private fun updateSearchUI() {
-        binding.ivHomeLogout.isVisible = !binding.ivHomeLogout.isVisible
+        binding.ivHomeSettings.isVisible = !binding.ivHomeSettings.isVisible
         binding.ivHomeSearchClose.isVisible = !binding.ivHomeSearchClose.isVisible
-        binding.tvHomeWelcome.isVisible = !binding.tvHomeWelcome.isVisible
-        binding.tvHomeUsername.isVisible = !binding.tvHomeUsername.isVisible
+        binding.vHomeAnimation.isVisible = !binding.vHomeAnimation.isVisible
+        //binding.tvHomeWelcome.isVisible = !binding.tvHomeWelcome.isVisible
+        //binding.tvHomeUsername.isVisible = !binding.tvHomeUsername.isVisible
     }
 
     override fun onItemClick(position: Int) {
         navigate()
         noteViewModel.setIsNewNote(false)
         Toast.makeText(requireContext(),"$position",Toast.LENGTH_SHORT).show()
+        Log.d("debug-- 1","${noteViewModel.getIsNewNote().value}")
     }
 
     override fun onDeleteClick(position: Int) {

@@ -1,8 +1,8 @@
-package com.example.notes.notesData
+package com.example.notes.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.notes.viewModels.NoteViewModel
+import com.example.notes.notesData.NotesDao
 
 
 class NotesViewModelFactory(private val dao: NotesDao) : ViewModelProvider.Factory {

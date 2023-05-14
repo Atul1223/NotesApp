@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -15,16 +16,14 @@ import com.example.notes.R
 import com.example.notes.databinding.FragmentNoteBinding
 import com.example.notes.notesData.Notes
 import com.example.notes.notesData.NotesDao
-import com.example.notes.notesData.NotesDatabase
-import com.example.notes.notesData.NotesViewModelFactory
+import com.example.notes.utils.AppConstants
+import com.example.notes.viewModels.NotesViewModelFactory
 import com.example.notes.viewModels.NoteViewModel
-import org.koin.android.ext.android.inject
 import org.koin.java.KoinJavaComponent
-import java.util.Date
 
 class NoteFragment : Fragment() {
 
-    private val noteViewModel: NoteViewModel by viewModels {
+    private val noteViewModel: NoteViewModel by activityViewModels {
         NotesViewModelFactory(getMyParameterFromKoin())
     }
 
@@ -34,6 +33,7 @@ class NoteFragment : Fragment() {
 
     private var _binding : FragmentNoteBinding? = null
     private val binding get() = _binding!!
+    private lateinit var currentTAG: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,14 +107,15 @@ class NoteFragment : Fragment() {
         }
 
         binding.ivBtnSaveNote.setOnClickListener {
-            noteViewModel.saveNotesData(
-                Notes(
-                    heading = "Hello",
-                    content = "Hello world",
-                    tag = noteViewModel.getCurrentTagType().toString(),
-                    //date = Date()
+            if(validateFields()){
+                noteViewModel.saveNotesData(
+                    returnNote()
                 )
-            )
+                binding.ivBtnBackNote.performClick()
+            }
+            else{
+                Toast.makeText(requireContext(),"Note heading is Empty",Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.ivBtnDeleteNote.setOnClickListener {
@@ -135,26 +136,31 @@ class NoteFragment : Fragment() {
             R.drawable.vd_tag_1 -> {
                 updateTagMenuVisibility(tag1 = false)
                 updateTitleColor(R.color.color_tag1)
+                currentTAG = AppConstants.NoteTags.tag_1
             }
 
             R.drawable.vd_tag_2 -> {
                 updateTagMenuVisibility(tag2 = false)
                 updateTitleColor(R.color.color_tag2)
+                currentTAG = AppConstants.NoteTags.tag_2
             }
 
             R.drawable.vd_tag_3 -> {
                 updateTagMenuVisibility(tag3 = false)
                 updateTitleColor(R.color.color_tag3)
+                currentTAG = AppConstants.NoteTags.tag_3
             }
 
             R.drawable.vd_tag_4 -> {
                 updateTagMenuVisibility(tag4 = false)
                 updateTitleColor(R.color.color_tag4)
+                currentTAG = AppConstants.NoteTags.tag_4
             }
 
             R.drawable.vd_tag_5 -> {
                 updateTagMenuVisibility(tag5 = false)
                 updateTitleColor(R.color.color_tag5)
+                currentTAG = AppConstants.NoteTags.tag_5
             }
         }
 
@@ -185,6 +191,8 @@ class NoteFragment : Fragment() {
     private fun setNoteContent(isNewNote: Boolean) {
         binding.ivBtnDeleteNote.isVisible = !isNewNote
 
+        Log.d("debug-- 2","${noteViewModel.getIsNewNote().value}")
+
         if(isNewNote) {
 //            binding.tvNoteHeading.text  =
 //
@@ -192,5 +200,20 @@ class NoteFragment : Fragment() {
 //
 //            updateNoteVM() =
         }
+    }
+
+    private fun returnNote(): Notes {
+        return Notes(
+            heading = binding.tvNoteHeading.text.toString(),
+            content = binding.tvNoteContent.text.toString(),
+            tag = currentTAG
+        )
+    }
+
+    private fun validateFields(): Boolean {
+        if(binding.tvNoteHeading.text.isNullOrBlank() || binding.tvNoteHeading.text.isNullOrEmpty()) {
+            return false
+        }
+        return  true
     }
 }

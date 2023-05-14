@@ -13,30 +13,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_home_welcome"
-        android:text="@string/welcome"
-        style="@style/AppButtonTextGeneric"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/g_horizontal_start"
-        app:layout_constraintEnd_toStartOf="@id/tv_home_username"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_home_username"
-        android:text="Atul"
-        style="@style/AppTextHeadingGeneric"
-        android:textColor="@color/white"
-        android:layout_marginStart="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tv_home_welcome"
-        app:layout_constraintBottom_toBottomOf="@id/tv_home_welcome"
-        app:layout_constraintStart_toEndOf="@id/tv_home_welcome"/>
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/tv_home_search"
         style="@style/AppSearchTextGeneric"
@@ -50,34 +26,81 @@
         android:id="@+id/iv_home_search"
         style="@style/AppImageIconGeneric"
         android:src="@drawable/selector_search"
-        android:layout_marginEnd="55dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/tv_home_search"
         app:layout_constraintBottom_toTopOf="@id/g_horizontal_start"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/v_home_animation"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_home_search_close"
-        style="@style/AppImageIconGeneric"
-        android:visibility="invisible"
-        android:src="@drawable/selector_close"
-        android:layout_marginEnd="10dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/v_home_animation"
+        android:layout_margin="5dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/iv_home_search"
         app:layout_constraintBottom_toTopOf="@id/g_horizontal_start"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/v_home"
+        style="@style/AppImageIconGeneric">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_home_logout"
-        style="@style/AppImageIconGeneric"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/selector_logout"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/v_home_sync_animation"
+            style="@style/AppImageIconGeneric"
+            android:visibility="invisible"
+            app:lottie_fileName="animation_sync.json"
+            app:layout_constraintStart_toStartOf="@id/v_home_animation"
+            app:layout_constraintEnd_toEndOf="@id/v_home_animation"
+            app:layout_constraintTop_toTopOf="@id/v_home_animation"
+            app:layout_constraintBottom_toBottomOf="@id/v_home_animation"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/iv_home_sync"
+            style="@style/AppImageIconGeneric"
+            android:src="@drawable/vd_sync"
+            app:layout_constraintStart_toStartOf="@id/v_home_animation"
+            app:layout_constraintEnd_toEndOf="@id/v_home_animation"
+            app:layout_constraintTop_toTopOf="@id/v_home_animation"
+            app:layout_constraintBottom_toBottomOf="@id/v_home_animation"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/v_home"
+        android:layout_marginEnd="5dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/v_home_animation"
         app:layout_constraintBottom_toTopOf="@id/g_horizontal_start"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/AppImageIconGeneric">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_home_settings"
+            style="@style/AppImageIconGeneric"
+            android:src="@drawable/selector_settings"
+            app:layout_constraintStart_toStartOf="@id/v_home"
+            app:layout_constraintEnd_toEndOf="@id/v_home"
+            app:layout_constraintTop_toTopOf="@id/v_home"
+            app:layout_constraintBottom_toBottomOf="@id/v_home"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_home_search_close"
+            style="@style/AppImageIconGeneric"
+            android:visibility="invisible"
+            android:src="@drawable/selector_close"
+            app:layout_constraintStart_toStartOf="@id/v_home"
+            app:layout_constraintEnd_toEndOf="@id/v_home"
+            app:layout_constraintTop_toTopOf="@id/v_home"
+            app:layout_constraintBottom_toBottomOf="@id/v_home"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_home_vd"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
