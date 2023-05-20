@@ -4,4 +4,9 @@
     <string name="welcome">Welcome</string>
     <string name="hint_title">Title</string>
     <string name="hint_note_content">Type Something...</string>
+    <string name="user_email">Signed in as \n %s</string>
+    <string name="sync_note_title">Sync Your notes automatically to cloud.</string>
+    <string name="sync_note_sub">Note will be saved to cloud as soon as it is created (Requires Internet connection)</string>
+    <string name="delete_data">Erase all Data</string>
+    <string name="requires_internet">(Requires Internet connection)</string>
 </resources>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SettingsFragment"
+    tools:background="@color/black">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_horizontal_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_horizontal_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_vertical_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_vertical_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_btn_back_settings"
+        style="@style/AppImageIconGeneric"
+        android:src="@drawable/selector_back_button"
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/g_horizontal_start"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="10dp"
+        android:gravity="start"
+        style="@style/AppTextGeneric"
+        android:text="@string/user_email"
+        app:layout_constraintStart_toEndOf="@id/g_vertical_start"
+        app:layout_constraintEnd_toStartOf="@id/g_vertical_end"
+        app:layout_constraintTop_toBottomOf="@id/g_horizontal_start"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_settings_note_sync"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="5dp"
+        android:paddingTop="10dp"
+        android:gravity="start"
+        style="@style/AppTextGeneric"
+        android:text="@string/sync_note_title"
+        app:layout_constraintStart_toEndOf="@id/g_vertical_start"
+        app:layout_constraintEnd_toStartOf="@id/g_vertical_end"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_email"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sub_settings_note_sync"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="5dp"
+        android:paddingBottom="10dp"
+        android:gravity="start"
+        style="@style/AppTextGeneric"
+        android:textSize="12sp"
+        android:textColor="@color/color_gray"
+        android:text="@string/sync_note_sub"
+        app:layout_constraintStart_toStartOf="@id/tv_settings_note_sync"
+        app:layout_constraintEnd_toEndOf="@id/tv_settings_note_sync"
+        app:layout_constraintTop_toBottomOf="@id/tv_settings_note_sync"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_settings_delete_all"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="5dp"
+        android:paddingTop="10dp"
+        android:gravity="start"
+        style="@style/AppTextGeneric"
+        android:text="@string/delete_data"
+        app:layout_constraintStart_toEndOf="@id/g_vertical_start"
+        app:layout_constraintEnd_toStartOf="@id/g_vertical_end"
+        app:layout_constraintTop_toBottomOf="@id/tv_sub_settings_note_sync"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sub_settings_delete_all"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="5dp"
+        android:paddingBottom="10dp"
+        android:gravity="start"
+        style="@style/AppTextGeneric"
+        android:textSize="12sp"
+        android:textColor="@color/color_gray"
+        android:text="@string/requires_internet"
+        app:layout_constraintStart_toStartOf="@id/tv_settings_delete_all"
+        app:layout_constraintEnd_toEndOf="@id/tv_settings_delete_all"
+        app:layout_constraintTop_toBottomOf="@id/tv_settings_delete_all"/>
+
+
+    <ToggleButton
+        android:id="@+id/btn_auto_sync_toggle"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:textColor="@color/white_transparent_0"
+        android:background="@drawable/selector_toggle"
+        app:layout_constraintTop_toTopOf="@id/tv_settings_note_sync"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sub_settings_note_sync"
+        app:layout_constraintStart_toEndOf="@id/g_vertical_end"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_setting_delete_all"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:src="@drawable/selector_delete_button"
+        app:layout_constraintTop_toTopOf="@id/tv_settings_delete_all"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sub_settings_delete_all"
+        app:layout_constraintStart_toEndOf="@id/g_vertical_end"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_user"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:textColor="@color/white_transparent_0"
+        android:background="@drawable/selector_user"
+        app:layout_constraintTop_toTopOf="@id/tv_user_email"
+        app:layout_constraintBottom_toBottomOf="@id/tv_user_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/g_vertical_start"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:textColor="@color/white_transparent_0"
+        android:background="@drawable/vd_sync"
+        app:layout_constraintTop_toTopOf="@id/tv_settings_note_sync"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sub_settings_note_sync"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/g_vertical_start"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:src="@drawable/vd_erase"
+        app:layout_constraintTop_toTopOf="@id/tv_settings_delete_all"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sub_settings_delete_all"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/g_vertical_start"/>
+
+    <View
+        android:id="@+id/v_settings_note_sync"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/g_vertical_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_settings_note_sync"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sub_settings_note_sync"/>
+
+    <View
+        android:id="@+id/v_settings_note_delete"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/g_vertical_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_settings_delete_all"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sub_settings_delete_all"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_logout"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
+        android:text="Sign-Out"
+        android:paddingStart="15dp"
+        android:gravity="center"
+        style="@style/AppButtonGeneric"
+        app:layout_constraintTop_toBottomOf="@id/g_horizontal_end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_logout"
+        android:layout_width="30dp"
+        android:layout_height="35dp"
+        android:layout_margin="15dp"
+        android:src="@drawable/selector_logout"
+        app:layout_constraintTop_toTopOf="@id/btn_logout"
+        app:layout_constraintBottom_toBottomOf="@id/btn_logout"
+        app:layout_constraintStart_toStartOf="@id/btn_logout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -25,6 +28,15 @@
         tools:layout="@layout/fragment_note" >
         <action
             android:id="@+id/action_noteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.notes.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

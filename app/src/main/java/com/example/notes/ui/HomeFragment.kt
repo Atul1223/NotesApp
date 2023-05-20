@@ -89,7 +89,7 @@ class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
 
     private fun initClickListeners() {
         binding.ivCreateNote.setOnClickListener {
-            navigate()
+            binding.root.findNavController().navigate(R.id.action_homeFragment_to_noteFragment)
             noteViewModel.setIsNewNote(true)
             homeViewModel.addToNotesList()
         }
@@ -104,7 +104,7 @@ class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
         }
 
         binding.ivHomeSettings.setOnClickListener {
-            //loginViewModel.logOutUser()
+            binding.root.findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
 
         binding.ivHomeSync.setOnClickListener {
@@ -120,10 +120,6 @@ class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
             binding.ivHomeSync.isVisible = true
             binding.vHomeSyncAnimation.isVisible= false
         }
-    }
-
-    private fun navigate(){
-        binding.root.findNavController()?.navigate(R.id.action_homeFragment_to_noteFragment)
     }
 
     private fun updateImage() {
@@ -162,7 +158,7 @@ class HomeFragment : Fragment(), NotesAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        navigate()
+        binding.root.findNavController().navigate(R.id.action_homeFragment_to_noteFragment)
         noteViewModel.setIsNewNote(false)
         Toast.makeText(requireContext(),"$position",Toast.LENGTH_SHORT).show()
         Log.d("debug-- 1","${noteViewModel.getIsNewNote().value}")
